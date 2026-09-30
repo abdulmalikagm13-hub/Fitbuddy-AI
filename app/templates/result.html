@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personal Workout Plan - FitBuddy</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #1e293b;
+        }
+        .alert {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .user-info, .tip-box, .feedback-section {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .tip-box {
+            border-left-color: #f59e0b;
+        }
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Consolas', 'Courier New', monospace;
+            line-height: 1.5;
+        }
+        textarea, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        .nav-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .nav-links a {
+            color: #3b82f6;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ Your Personalized Workout Plan</h1>
+
+        {% if updated_message %}
+        <div class="alert">
+            ✅ {{ updated_message }}
+        </div>
+        {% endif %}
+
+        <div class="user-info">
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> {{ username }}</p>
+            <p><strong>User ID:</strong> {{ user_id }}</p>
+            <p><strong>Age:</strong> {{ age }}</p>
+            <p><strong>Weight:</strong> {{ weight }} kg</p>
+            <p><strong>Goal:</strong> {{ goal }}</p>
+            <p><strong>Intensity:</strong> {{ intensity }}</p>
+        </div>
+
+        <h2>Workout Plan</h2>
+        <pre>{{ workout_plan }}</pre>
+
+        <div class="tip-box">
+            <h2>💡 Nutrition Tip</h2>
+            <p>{{ nutrition_tip }}</p>
+        </div>
+
+        <div class="feedback-section">
+            <h2>📝 Share Your Feedback</h2>
+            <form action="/submit-feedback" method="POST">
+                <label for="user_id"><strong>Your Unique User ID:</strong></label>
+                <input type="number" id="user_id" name="user_id" value="{{ user_id }}" required>
+                
+                <label for="feedback" style="margin-top: 10px; display: block;"><strong>Your Feedback:</strong></label>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Let us know how we can improve your plan..." required></textarea>
+                
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">← Back to Home</a> | <a href="/view-all-users">View All Users (Admin)</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+import os
+from PIL import Image, ImageDraw
+
+# Set path to the target image directory
+output_dir = os.path.join("app", "static", "images")
+os.makedirs(output_dir, exist_ok=True)
+image_path = os.path.join(output_dir, "gym-bg.jpg")
+
+# Create a dark gradient image (1280x720)
+width, height = 1280, 720
+image = Image.new("RGB", (width, height))
+draw = ImageDraw.Draw(image)
+
+# Fill with a dark gray to dark blue background gradient
+for y in range(height):
+    r = int(15 + (y / height) * 20)
+    g = int(23 + (y / height) * 25)
+    b = int(42 + (y / height) * 35)
+    draw.line([(0, y), (width, y)], fill=(r, g, b))
+
+# Save image file
+image.save(image_path, "JPEG")
+print(f"Placeholder image successfully created at: {image_path}")
